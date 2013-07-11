@@ -1,0 +1,55 @@
+<Style>
+.sequence{
+width:700px;
+text-align:left; 
+padding:5px 25px 5px 25px; 
+text-align:justify; 
+font-family:monospace;
+background-color:white; 
+border-radius: 0em 2em 2em 2em;
+
+}
+.protein_data{
+padding:10px;
+background-color:#f5fefd; 
+border-radius: 0em 2em 2em 2em;
+ border:1px solid rgb(77, 202, 9);
+}
+
+table.sequence, th.sequence, td.sequence{
+
+border-collapse:collapse;
+border:1px dotted rgb(77, 202, 9);
+}
+
+
+</Style>
+{% load typei_extras %}
+<div style="width:800px;  padding: 10px; color:rgb(50,50,50);">
+GI: <a href="/enzymes/protein/{{protein.id}}">{{protein.gene_id|process_gene_id}}</a>
+| From: <a href="/enzymes/dna/{{protein.system.dnapiece.id}}">{{protein.system.dnapiece.name|process_dnapiece_name}}</a>
+| On: <a href="/enzymes/genome/{{protein.system.dnapiece.genome.id}}">{{protein.system.dnapiece.genome.name|process_genome_name}}</a>
+
+{%if protein.subunit_kind %}<br>
+	{{protein.subunit_kind|process_subunit_kind}}.
+	{%if protein.hammer_cluster %}
+		| Family: {{protein.hammer_cluster|process_hammer_cluster}}
+	{%endif%}
+{%else%}<br>
+	{{protein.system_part|process_system_part}}.
+	{%if protein.hh_pfam_id%}
+		It is most similar to pFam family: '{{protein.hh_pfam_id}} 
+		Described as: {{protein.hh_pfam_desc}}	
+	{%endif%}
+{%endif%}
+<br>
+Position on the DNA: {{protein.strand}}{{protein.genome_location}}
+| Length: {{protein.dna_length}} bp
+| Distance from the preceding protein: {{protein.margin_left}} bp
+
+
+<div class="sequence">
+{{protein.aa_sequence|process_aa_sequence}}
+
+</div>
+</div>

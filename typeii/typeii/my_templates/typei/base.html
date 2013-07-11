@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>TypeI beta!</title>
+<meta name="description" content=" " />
+<meta name="keywords" content=" " />
+<meta http-equiv="Content-Language" content="en-us" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}/css/style.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="{{MEDIA_URL}}jscript/tiles.js"></script>
+<script src="{{MEDIA_URL}}jscript/jquery.sparkline.js"></script>
+<script>
+$(document).ready(function() {
+	$('li').click(function() {
+		$('li').removeClass('active');
+		$(this).addClass('active');
+		 });
+	//if($('#maincont').has($('#circle')).length == 0){
+	
+	
+	$('a, .cell').click(function() {
+		  console.log('aaaaaaaaaaaaaaaaaaa');  
+		  $circle=$('#circle');
+		  
+		  $('#maincont').empty().css({'background-color':'white'}).append($circle);
+		  $('#circle').css({'display':'block'})
+		 });
+	}
+
+);
+
+</script>
+{%block head_script%}
+{%endblock%}
+<style>
+#circle{
+display:none;
+line-height:250px;
+width:100%;
+color:#212f57;
+font-family: "Lucida Grande", Verdana;
+font-size: 20px;
+text-align:center;
+}
+html, body {
+    margin:0;
+    padding:0;
+    font-family: "Lucida Grande", Verdana;
+    font-size: 0.9em;
+   #text-align: center;
+    background-color:#F2F2F2;
+}
+#top_menu ul{list-style-type: none; margin: 0; padding: 0; overflow: hidden;}
+#top_menu{background:#212f57; color:#fff; height:42px; width:100%;}
+#top_menu ul, #submenu ul{list-style-type:none; margin:0; padding:0; overflow:hidden;}
+#top_menu ul li{padding:0 16px 0 16px;}
+#top_menu ul li:first-child{margin-left:5%;}
+#top_menu ul li.last{margin-right:5%;}
+#top_menu ul li a, #submenu ul li a{display:block;text-decoration:none;color:#fff;line-height:46px;font-size:14px;}
+#top_menu ul li a:hover,#top_menu ul li.active a, #top_menu ul li.trail a{background:url('/media/images/core/top_menu_li_hover_bg.png') top center no-repeat;}
+.right{float:right;}
+.left{float:left;}
+</style>
+
+</head>
+<body>
+<div id="container">  
+<div id="top_menu">
+<ul class="level_1">
+<li class="left first" title="home">	<a class="first" href="/enzymes/base">Home</a></li>
+<li class="left" title="browse"> 			<a  href="/enzymes/browse" >Browse</a></li>
+<li class="left" title="search"> 			<a  href="/enzymes/searchAll">Search</a></li>
+<li class="left" title="stats">  			<a  href="/enzymes/calculate_order">Stats</a></li>
+<li class="left" title="contact">			<a  href="/enzymes/contact">Contact</a></li>
+<li class="left" title="admin">  			<a  href="/admin">Admin</a></li>
+
+<!-- <li class="left"><img style=" float:left; width:auto; height:auto;"src="{{MEDIA_URL}}images/core/tirmsbase.png" class="headerleft logo" alt="typeIbase" /></li> -->
+<li class="right last"><a href="http://genesilico.pl" target="blank" title="Our lab" > Genesilico.pl</a></li>
+</ul>
+</div>
+
+  <div id="maincont">
+  {%block maincont%}
+  
+  {%endblock%}
+  </div>
+	<div id="footercont">
+		<div id="footerleft">
+			<p><a title="back to top" href="#container"><strong>^ back to top</strong></a></p>
+		</div>
+		<div id="footerright">
+            <p>Last update: 27.06.2013</p>
+	</div>
+		</div>
+		<div id="circle">
+		<img src="{{MEDIA_URL}}images/core/loading.gif" />
+		<br/>I am loading data. Please wait.
+		</div>
+</div>
+
+</body>

@@ -1,0 +1,46 @@
+table,th, td{
+border-collapse:collapse;
+border:1px dotted rgb(77, 202, 9);
+text-align:left;
+
+}
+table{
+width:700px;
+margin-left:auto; 
+margin-right:auto;
+}
+td{padding-left:15px}
+tr{}
+tr.alt{ 
+background-color: #f5fefd;
+}
+td.sequence{
+text-align:left; 
+padding:5px 25px 5px 25px; 
+text-align:justify; 
+font-family:monospace;
+
+}
+
+th.sequence{
+color:rgb(170,170,170);
+background-color: #f5fefd;
+padding:2px;
+
+}
+table.sequence, th.sequence, td.sequence{
+border-collapse:collapse;
+border:1px dotted rgb(77, 202, 9);
+}
+table.sequence{
+margin-top:10px;
+}
+
+a.rollover img {
+	height:28px;
+	width:35px;
+}
+a.rollover:hover > img {
+	height: 30px;
+	width:35px;
+}

@@ -1,0 +1,321 @@
+.logo {
+//width: 600px;
+position absolute;
+left: 0px;
+top:10px;
+//margin-top: 25px;
+}
+
+
+/* links */
+a:link, a:visited {
+        color: #666;
+        background: inherit;
+        text-decoration:none;
+}
+a:hover { 
+        color: #000000;
+        background: inherit;
+        text-decoration:none;
+} 
+
+
+
+body
+{
+	margin: 0 0 30px 0;
+	padding: 0;
+	background: #fff;
+	background-image:url('../images/core/dna.jpg');
+	background-repeat:no-repeat;
+	font-size: 75%;
+	font-family: "arial", "verdana", "tahoma", "georgia", "trebuchet ms";
+	color: #666;
+}
+
+img
+{
+	border: 0;
+}
+
+#container
+{
+	margin: 0 auto;
+	//max-width: 1000px;
+	background-color: rgba(255, 255, 255, 0.8);
+
+}
+
+#headercont
+{
+	min-width: 1000px;
+	height: 38px;
+	border-bottom: 5px solid #212f57;
+	background-color:#212f57;
+	box-shadow:#333 0px 0px 10px;;
+}
+
+#headerleft
+{
+	float: left;
+//	width: 480px;
+//	height: 50px;
+	padding-left:10px;
+}
+
+#headerleft h1
+{
+	margin: 48px 0 0 15px;
+	padding: 0;
+	font-size: 220%;
+	font-weight: normal;
+	color: #F90;
+	letter-spacing: -1px;
+}
+
+#headerleft h1 span
+{
+	color: #FFC875;
+	font-weight: normal;
+}
+
+#headerright
+{
+	float:left;
+}
+
+#headerright ul
+{
+	padding-top:18px;
+	height: 23px;
+	width: 100%;
+	margin: 0px 0 0 0;
+	
+	list-style-type: none;
+	text-align: right;
+	color: #fff;
+	background-color: #212f57;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+#headerright ul li
+{
+	display: inline;
+	height:100%;
+	
+	margin: 0 0 0 0px;
+	padding-top:0px;
+	#box-shadow: #ccc 10px 0px 10px inset;
+}
+li.active{
+background: url('../images/core/top_menu_li_hover_bg.png') top center no-repeat;
+
+}
+#headerright ul li a
+{
+	text-decoration: none;
+	color: #fff;
+	line-height:0px;
+}
+
+#headerright ul li a.active
+{
+	text-decoration: none;
+	color: yellow;
+	font-weight: bold;
+}
+
+#headerright ul li a:hover
+{
+	text-decoration: none;
+	color: yellow;
+}
+
+#maincont
+{
+    //position: absolute;
+	//max-width: 1000px;
+	line-height: 160%;
+	padding: 15px 0 0 0;
+	border-bottom: 1px dashed #999;
+}
+
+#maincont p
+{
+	margin: 0 15px 15px 15px;
+}
+
+#maincont h2, h3
+{
+	margin: 0 0 15px 0;
+	padding: 0px 15px;
+	font-size: 110%;
+	font-weight: bold;
+	//color: #339900;
+	color: #FF0000;
+	border-bottom: 1px dashed #E5E5E5;
+}
+
+#mainleft
+{
+	float: left;
+	width: 485px;
+	padding: 0 15px 0 0;
+}
+
+#mainleft img
+{
+	float: left;
+	/*border: 1px dashed #CDCDCD;*/
+	padding: 5px;
+	margin: 0 15px 5px 15px;
+}
+
+#mainright
+{
+	float: left;
+	width: 485px;
+	padding: 0 0 0 15px;
+}
+
+#mainright img
+{
+	float: left;
+	/*border: 1px dashed #CDCDCD;*/
+	padding: 5px;
+	margin: 0 15px 5px 15px;
+}
+
+#bottom
+{
+	clear: both;
+	width: 800px;
+}
+
+#footercont
+{	
+	min-width: 1000px;
+	height: 50px;
+	color: #999;
+}
+
+#footercont p
+{
+	margin: 0;
+	padding: 15px;
+}
+
+#footercont a
+{
+	color: #999;
+	text-decoration: none;
+}
+
+#footercont a:hover
+{
+	color: #F90;
+	text-decoration: none;
+}
+
+#footerleft
+{
+	float: left;
+	width: 300px;
+	height: 50px;
+}
+
+#footerright
+{
+	float: right;
+	width: 500px;
+	height: 50px;
+	text-align: right;
+}
+
+	span.protein {
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	height:20px;
+	display:inline-block;
+	text-align: center; 
+	}
+	.plasmid{
+	color:rgb(140, 145, 145);
+	background-color:#feffff;
+	border:1px solid rgb(240, 240, 240); 
+	margin: 8px; 
+	margin-top: 0px; 
+	margin-left:20px;  
+	border-radius: 24px 25px 24px 25px; 
+	padding: 10px;
+	}
+	div.plasmid:hover{	
+	border:1px solid #A498Ec;
+	}
+	a.plasmid_name{
+	display:block;
+	margin-left: 38px;
+	margin-bottom:-12px;
+	color: rgb(140, 145, 145);
+	}
+	a.plasmid_name:hover{	
+	color:#8478cc;
+	}
+	a.protein{
+	color:rgb(140, 145, 145);
+	}
+	a.protein:hover{
+	color: #8478cc;
+	font-weight:bolder;
+	}
+	div.test:hover{border:4px solid red;
+	}
+	a.genome{
+	color:rgb(140, 145, 145);
+	}
+	a.genome:hover{
+	 color: #8478cc;
+	}
+	#M{background-image:url('../images/protein/M.jpg');}
+	#Mminus{background-image:url('../images/protein/Mminus.jpg');}
+	#R{background-image:url('../images/protein/R.jpg');}
+	#Rminus{background-image:url('../images/protein/Rminus.jpg');}
+	#S{background-image:url('../images/protein/S.jpg');}
+	#Sminus{background-image:url('../images/protein/Sminus.jpg');}
+	#NOplus{background-image:url('../images/protein/NO.jpg');}
+	#NOminus{background-image:url('../images/protein/NOminus.jpg');}
+
+
+
+#serch_all{ 
+font-size:18px; 
+color:rgb(120, 120, 120);
+margin-left:30px; 
+margin-top:-5px;
+padding:10px;
+border-radius: 0em 0em 0em 2em;
+border:0px solid rgb(77, 202, 9);
+}
+#serch_all .form_wrapper{
+padding-left:40px; 
+text-align:left; 
+font-size:18px; 
+color:rgb(120, 120, 120);
+}
+#serch_all #tab{
+text-align:center; 
+font-size:25px; 
+color:rgb(80, 80, 80);
+}
+#serch_all .sbutton { 
+margin-top:20px;
+width:250px;
+padding:5px;
+text-align:center;
+}
+#protein_search_form, #system_search_form{
+display:none;
+}

@@ -1,0 +1,55 @@
+	span.protein {
+	background-size:100% 100%;
+	background-repeat:no-repeat;	
+	height:20px;
+	display:inline-block;
+	text-align: center; 
+	}
+	.plasmid{
+	color:rgb(140, 145, 145);
+	background-color:#feffff;
+	border:1px solid rgb(240, 240, 240); 
+	box-shadow:0px 0px 10px rgb(200, 195, 195); 
+	margin: 8px; 
+	margin-top: 0px; 
+	margin-left:20px;  
+	border-radius: 24px 25px 24px 25px; 
+	padding: 10px;
+	}
+	div.plasmid:hover{	
+	
+	box-shadow:0px 0px 10px #A498Ec;
+	}
+	a.plasmid_name{
+	display:block;
+	margin-left: 38px;
+	margin-bottom:-12px;
+	color: rgb(140, 145, 145);
+	}
+	a.plasmid_name:hover{	
+	color:#8478cc;
+	}
+	a.protein{
+	color:rgb(140, 145, 145);
+	}
+	a.protein:hover{
+	color: #8478cc;
+	font-weight:bolder;
+	}
+	div.test:hover{border:4px solid red;
+	}
+	a.genome{
+	color:rgb(140, 145, 145);
+	}
+	a.genome:hover{
+	 color: #8478cc;
+	 }
+	#M{background-image:url('{{MEDIA_URL}}/images/protein/M.jpg/');}
+	#Mminus{background-image:url('{{MEDIA_URL}}/images/protein/Mminus.jpg/');}
+	#R{background-image:url('{{MEDIA_URL}}/images/protein/R.jpg/');}
+	#Rminus{background-image:url('{{MEDIA_URL}}/images/protein/Rminus.jpg/');}
+	#S{background-image:url('{{MEDIA_URL}}/images/protein/S.jpg/');}
+	#Sminus{background-image:url('{{MEDIA_URL}}/images/protein/Sminus.jpg/');}
+	#NOplus{background-image:url('{{MEDIA_URL}}/images/protein/NO.jpg/');}
+	#NOminus{background-image:url('{{MEDIA_URL}}/images/protein/NOminus.jpg/');}
+

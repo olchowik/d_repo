@@ -1,0 +1,26 @@
+{% extends "typei/base.html" %}
+{%block head_script%}
+<script>
+$(document).ready(function() {
+
+	$('li').removeClass('active');
+	$('li[title="contact"]').addClass('active');
+	});
+</script>
+{%endblock%}
+{%block maincont%}
+<div style="font-size:20px; padding:20px;">
+<table>
+<h4>People</h4>
+<tr><td>Ceslovas Venclovas</td><td> venclovas@ibt.lt</td></tr>
+<tr><td>Albertas Timinskas</td><td>  timis@ibt.lt</td></tr>
+<tr><td>Anna Olchowik</td><td>    ania.olchowik@genesilico.pl</td></tr>
+<tr><td>Janusz M. Bujnicki</td><td>  iamb@genesilico.pl</td></tr>
+</table>
+<br>
+<h4>Labs</h4>
+<a href="www.http://genesilico.pl/">Laboratory of Bioinformatics and Protein Engineering, International Institute of Molecular and Cell Biology in Warsaw</a><br>
+<a href="www.ibt.lt/en/laboratories/bioinfo_en.html">Department of Bioinformatics, Vilnius University</a>
+</div>
+{%endblock%}
+      

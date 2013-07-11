@@ -1,0 +1,249 @@
+{% extends "typei/base.html" %}
+{%block head_script%}
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/jquery-1.8.3.min.js"></script>
+<!--    <script type="text/javascript" src="{{MEDIA_URL}}jscript/jquery.sparkline.js"></script>
+[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="{{MEDIA_URL}}jscript/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}css/jquery.jqplot.css" />
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/plugins/jqplot.barRenderer.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/plugins/jqplot.pointLabels.min.js"></script> 
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/plugins/jqplot.cursor.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}amcharts/amcharts/amcharts.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    	$('li').removeClass('active');
+	    $('li[title="stats"]').addClass('active');
+	    
+      	 var data0 = [
+      	             ['M', {{M}}],['R', {{R}}],['S', {{S}}],['SS', {{SS}}],['MS', {{MS}}], ['RS', {{RS}}],['MR', {{MR}}],
+     	          	 ];
+     	           var plot0 = jQuery.jqplot ('chart0', [data0], 
+     	             {    
+     	        	   title: 'Solitary M R and S subunits ',      // Title for the plot.  Can also be specified as an object like:     
+     	               seriesDefaults: {
+     	                 renderer: jQuery.jqplot.PieRenderer, 
+     	                 rendererOptions: {
+      	                   fill: true,
+     	                   showDataLabels: true, 
+     	                   sliceMargin: 2,
+     	                   lineWidth: 1
+     	                 }
+     	               }, 
+     	               grid: {borderColor: '#000', borderWidth: 0,  shadow: false},
+     	               legend: { show:true, location: 'e' }
+     	             }
+     	           );
+   	 var data1 = [
+	             ['MRS[2]', {{MRSS}}],['MRS[3]', {{MRSSS}}],['MRS[4]', {{MRSSSS}}], 
+	             ['M[2]RS', {{MMRS}}],['M[2]RS[2]', {{MMRSS}}], ['M[2]RS[20]', {{MMRSSSSSSSSSSSSSSSSSSSS}}],
+	             ['M[2]R[2]S', {{MMRRS}}],['M[2]R[2]S[2]', {{MMRRSS}}],  ['MR[2]S[2]', {{MRRSS}}],
+	             ['M[3]RS[2]', {{MMMRSS}}], ['M[3]R[2]S[2]', {{MMMRRSS}}]
+	             ];
+	           var plot1 = jQuery.jqplot ('chart1', [data1], 
+	             { title: 'Subunit distribution in type I rm systems that contain more than 3 subunits including at least one M R and S classified to the same family',      // Title for the plot.  Can also be specified as an object like:       
+	               seriesDefaults: {
+	                 renderer: jQuery.jqplot.PieRenderer, 
+	                 rendererOptions: {
+	                        // Turn off filling of slices.
+	                  // seriesColors: [ "rgba(148,216,0,1)", "rgba(0,148,216,1)", "rgba(216,70,148,0.9)","yellow","orange","blue"],  // colors that will
+	                   fill: true,
+	                   showDataLabels: true, 
+	                   // Add a margin to seperate the slices.
+	                   sliceMargin: 2, 
+	                   // stroke the slices with a little thicker line.
+	                   lineWidth: 1
+	                 }
+	               }, 
+	               grid: {
+ 	    	            borderColor: '#000',     // CSS color spec for border around grid.
+	    	            borderWidth: 0,           // pixel width of border around grid.
+	    	            shadow: false,               // draw a shadow for grid    	                                        // CanvasGridRenderer takes no additional options.
+	    	        },
+	               legend: { show:true, location: 'e' }
+	             }
+	           );
+    	 var data = [
+    	             ['RMS', {{RMS}}],['RSM', {{RSM}}], ['MSR', {{MSR}}], 
+    	             ['SMR', {{SMR}}],['MRS', {{MRS}}], ['SRM', {{SRM}}]
+    	           ];
+    	           var plot2 = jQuery.jqplot ('chart2', [data], 
+    	             {  title: 'Subunit order in type I rm systems that contain three subunits M R and S classified to the same family',      // Title for the plot.  Can also be specified as an object like:
+ 	                  
+    	               seriesDefaults: {
+    	                 renderer: jQuery.jqplot.PieRenderer, 
+    	                 rendererOptions: {
+    	                   // Turn off filling of slices.
+    	                   seriesColors: [ "rgba(148,216,0,1)", "rgba(0,148,216,1)", "rgba(216,70,148,0.9)","yellow","orange","blue"],  // colors that will
+    	                   fill: true,
+    	                   showDataLabels: true, 
+    	                   // Add a margin to seperate the slices.
+    	                   sliceMargin: 2, 
+    	                   // stroke the slices with a little thicker line.
+    	                   lineWidth: 1
+    	                 }
+    	               }, 
+    	               grid: {
+     	    	            borderColor: '#000',     // CSS color spec for border around grid.
+    	    	            borderWidth: 0,           // pixel width of border around grid.
+    	    	            shadow: false,               // draw a shadow for grid    	                                        // CanvasGridRenderer takes no additional options.
+    	    	        },
+    	               legend: { show:true, location: 'e' }
+    	             }
+    	           );
+    	           
+    		$('ul:first a[title="stats"]').addClass('active');
+    	    var rms=[{{ARMS}},{{BRMS}},{{CRMS}},{{DRMS}},{{ERMS}},{{FRMS}},{{GRMS}},{{HRMS}}];
+			var rsm=[{{ARSM}},{{BRSM}},{{CRSM}},{{DRSM}},{{ERSM}},{{FRSM}},{{GRSM}},{{HRSM}}];
+			var msr=[{{AMSR}},{{BMSR}},{{CMSR}},{{DMSR}},{{EMSR}},{{FMSR}},{{GMSR}},{{HMSR}}];
+			var mrs=[{{AMRS}},{{BMRS}},{{CMRS}},{{DMRS}},{{EMRS}},{{FMRS}},{{GMRS}},{{HMRS}}];
+			var smr=[{{ASMR}},{{BSMR}},{{CSMR}},{{DSMR}},{{ESMR}},{{FSMR}},{{GSMR}},{{HSMR}}];
+			var srm=[{{ASRM}},{{BSRM}},{{CSRM}},{{DSRM}},{{ESRM}},{{FSRM}},{{GSRM}},{{HSRM}}];
+
+			var horizontal_ticks  = ['A', 'B','C','D','E','F','G','H'];
+			var vartical_ticks = ['0', '10', '20', '30','40','50','60','70','80','90','100'];
+			plot3 = $.jqplot('chart3', [rms,rsm,msr,mrs,smr,srm], {
+    	    // Tell the plot to stack the bars.
+    	    seriesColors: [ "rgba(148,216,0,1)", "rgba(0,148,216,1)", "rgba(216,70,148,0.9)","yellow","orange","blue"],  // colors that will
+   			title: 'Subunit sequence on the DNA starnd in type I enzymes',      // Title for the plot.  Can also be specified as an object like:
+    	    stackSeries: true,
+    	   // captureRightClick: true,
+    	    seriesDefaults:{
+    	      renderer:$.jqplot.BarRenderer,
+    	      rendererOptions: {
+    	          // Put a 30 pixel margin between bars.
+    	          barMargin: 0,
+    	          shadowOffset	:0,
+    	          shadowDepth	:0,
+    	          shadowAlpha	:0,
+    	          // Highlight bars when mouse button pressed.
+    	          // Disables default highlighting on mouse over.
+    	         // highlightMouseDown: true   
+    	      },
+    	      pointLabels: {show: true}
+    	    },
+    	    axes: {
+    	      xaxis: {
+    	          renderer: $.jqplot.CategoryAxisRenderer
+    	      },
+    	      yaxis: {
+    	    	padMin: 0,
+      	        padMax: 0,
+    	        // Don't pad out the bottom of the data range.  By default,
+    	        // axes scaled as if data extended 10% above and below the
+    	        // actual range to prevent data points right on grid boundaries.
+    	        // Don't want to do that here.
+    	        //renderer: $.jqplot.CategoryAxisRenderer,
+    	       // tickOptions: {formatString: '\%%d'},
+    	      },
+    	      xaxis: {
+    	    	renderer: $.jqplot.CategoryAxisRenderer,
+      	        // Don't pad out the bottom of the data range.  By default,
+      	        // axes scaled as if data extended 10% above and below the
+      	        // actual range to prevent data points right on grid boundaries.
+      	        // Don't want to do that here.
+      	        ticks: horizontal_ticks
+      	      }
+    	    },
+    	    series:[
+    	            {label:'RMS'},
+    	            {label:'RSM'},
+    	            {label:'MSR'},
+    	            {label:'MRS'},
+    	            {label:'SMR'},
+    	            {label:'SRM'}
+    	
+    	        ],
+    	        grid: {
+    	            drawGridLines: false,        // wether to draw lines across the grid or not.
+       	            
+    	            borderColor: '#000',     // CSS color spec for border around grid.
+    	            borderWidth: 0,           // pixel width of border around grid.
+    	            shadow: false,               // draw a shadow for grid    	                                        // CanvasGridRenderer takes no additional options.
+    	        },
+    	      
+    	    legend: {
+    	      show: true,
+    	      location: 'e',
+    	      placement: 'outside'
+    	    },
+    	    cursor:{ 
+    	        show: true,
+    	        zoom:true, 
+    	        showTooltip:false
+    	      } 
+    	     
+    	  });
+    	  // Bind a listener to the "jqplotDataClick" event.  Here, simply change
+    	  // the text of the info3 element to show what series and ponit were
+    	  // clicked along with the data for that point.
+			$('#chart3').bind('jqplotDataClick', 
+				    function (ev, seriesIndex, pointIndex, data) {
+				      $('#info3').html('series: '+seriesIndex+', point: '+pointIndex+', data: '+data);
+				    }
+				  ); 
+    	    $('.jqplot-point-label').each(function( index ) {
+    	    	if($(this).text()=='0'){$(this).text('');}
+    	    });
+			
+    });
+    </script>
+{%endblock%}
+{%block  maincont%}
+<style>
+#chart2{
+//display:inline-block;
+//float:left;
+}
+#chart1{
+//display:inline-block;
+//float:right;
+
+}
+#chart3, #chart0{
+//display:inline-block;
+}
+</style>
+<center>
+<h3>Distribution of MSR subunits. </h3>
+<h4>Type I systems tend to consict of one hsdM, one hsdS and one hsdR. All other cases has been analysed here. First the occurence of subunits that do not form type I system judging only by genomic proximity of other type I subunits. Most frequently we can encounter solitary hsdS subunits (S, SS), and hsdS+hsdM subunits without hsdR anywhere around (MS). Solitary R subunits are not uncomon (R), also they occur more frequently accompanied by hsdS (RS) than hsdM (MR).</h4>
+<div id="chart0" style="height: 300px; width: 50%;">
+</div><br>
+<h4>Type I systems consisting of more than one hsdM, one hsdS and one hsdR are quite frequent. In over 60% of cases there are only additional hsdS subunits present. M subunit is duplicated in 12%, also in 12% has hsdM and hsdS subunit duplicated. Duplication of hsdR subunit is allways associated with multiplication of hsdM or hsdS subunit. HsdS subunit can be multiplicated up tp 20 times in a single system</h4>
+<div id="chart1" style="height: 300px; width: 50%;">
+</div><br>
+<h3>Subunits order on the DNA strand</h3>
+<h4>Order of type I subunit coding genes on DNA strand was analysed in systems consisting of one hsdM one hsdS and one hsdR subunit. Out of six possible gene orders MSR is the most frequent one.</h4>
+<div id="chart2" style="height: 300px; width: 50%;">
+
+</div><br>{MSR: 517, RMS: 177, RSM: 77, MRS: 3,SMR: 2, SRM: 1}<br>
+<h4>Systems that were classified to different families have different gene orders. e.g.  99% of systems classified to families D and F have MSR gene order.</h4>
+<div id="info3"></div>
+<div id="chart3" style="height:400px;width:800px;border:none; "></div> 
+</center>
+<br>
+<!--  
+<span class='legend'>RMS:{{RMS}} </span>
+<span class='legend'>RSM:{{RSM}}</span>
+<span class='legend'>MSR:{{MSR}}</span>
+<span class='legend'>SMR:{{SMR}}</span>
+<span class='legend'>MRS:{{MRS}}</span>
+<span class='legend'>SRM:{{SRM}}</span>
+<div>
+
+<pre>
+            var rms=[{{ARMS}},{{BRMS}},{{CRMS}},{{DRMS}},{{ERMS}},{{FRMS}},{{GRMS}},{{HRMS}}];
+			var rsm=[{{ARSM}},{{BRSM}},{{CRSM}},{{DRSM}},{{ERSM}},{{FRSM}},{{GRSM}},{{HRSM}}];
+			var msr=[{{AMSR}},{{BMSR}},{{CMSR}},{{DMSR}},{{EMSR}},{{FMSR}},{{GMSR}},{{HMSR}}];
+			var mrs=[{{AMRS}},{{BMRS}},{{CMRS}},{{DMRS}},{{EMRS}},{{FMRS}},{{GMRS}},{{HMRS}}];
+			var smr=[{{ASMR}},{{BSMR}},{{CSMR}},{{DSMR}},{{ESMR}},{{FSMR}},{{GSMR}},{{HSMR}}];
+			var srm=[{{ASRM}},{{BSRM}},{{CSRM}},{{DSRM}},{{ESRM}},{{FSRM}},{{GSRM}},{{HSRM}}];
+</pre>
+
+</div>
+<p>
+<span class="inlinebar">{{RMS}},{{RSM}},{{MSR}},{{SMR}},{{MRS}},{{SRM}}</span>
+</p>
+-->
+{%endblock%}

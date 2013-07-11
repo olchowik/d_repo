@@ -1,0 +1,56 @@
+<LINK REL=StyleSheet HREF="http://localhost:8000/media/css/proteinShort.css" TYPE="text/css" MEDIA=screen>
+
+{% load typei_extras %}
+<div style="width:800px;  padding: 10px; color:rgb(50,50,50);" >
+
+{%if protein.subunit_kind %}<br>
+	<div style="text-align:center;">{{protein.subunit_kind|process_subunit_kind}}. {{protein.system_part|process_system_part}}.</div>
+
+{%else%}<br>
+	<div style="text-align:center;">{{protein.system_part|process_system_part}}.</div> 
+	{%if protein.hh_pfam_id%}
+		<div style="padding-left:30px;padding-right:30px; ">
+		It is most similar to pFam family: '{{protein.hh_pfam_id}} 
+		Described as: {{protein.hh_pfam_desc}}
+		</div>		
+	{%endif%}
+{%endif%}
+
+<table>
+<tr class='alt'>
+<td>GI</td>
+<td><a NAME="{{protein.id}}">{{protein.gene_id|process_gene_id}}</a></td>
+{%if protein.hammer_cluster %}
+	<td>Assigned to</td>
+	<td>{{protein.hammer_cluster|process_hammer_cluster}} </td>
+{%endif%}
+</tr>
+
+<tr >
+<td>DNA file</td>
+<td>{{protein.system.dnapiece.name}}</td>
+<td>System number</td>
+<td>{{protein.system.dnapiece.id}}</td>
+</tr>
+
+<tr class='alt'>
+<td>position on the DNA strand</td>
+<td>{{protein.strand}}{{protein.genome_location}} </td>
+<td>length of the protein in bp</td>
+<td>{{protein.dna_length}} bp </td>
+</tr>
+<tr>
+<td>distance from the preceding protein</td>
+<td>{{protein.margin_left}} bp </td>
+</tr>
+</table>
+<table class="sequence">
+<tr>
+<th class="sequence" style="color:rgb(120,120,120);">Amino acid sequence of this protein:</th>
+</tr>
+<tr>
+<td class="sequence">{{protein.aa_sequence|process_aa_sequence}}</td>
+</tr>
+</table>
+
+</div>

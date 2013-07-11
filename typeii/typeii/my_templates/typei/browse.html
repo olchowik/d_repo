@@ -1,0 +1,218 @@
+{% extends "typei/base.html" %}
+{%block head_script%}
+<script>
+$(document).ready(function() {
+	$('li').removeClass('active');
+	$('li[title="browse"]').addClass('active');
+	});
+</script>
+{%endblock%}
+{%block maincont%}
+{% load typei_extras %}
+<script>
+
+function myfunction(url){window.location.href = url;}  
+
+function setMarginLeft($MarginLeft ){
+if ($MarginLeft>10){$MarginLeft=$MarginLeft/10;}
+	return $MarginLeft;
+}
+  
+</script>  
+<STYLE type="text/css">
+	span.protein {
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	background-image:none;
+	height:20px;
+	display:inline-block;
+	text-align: center; 
+	}
+
+.protein {
+margin:0px;
+padding:0px;
+font-size: 12px ;
+word-spacing: -1px;
+white-space-collapsing:discard;
+}
+	span.protein {
+	display: inline-block;
+	position:relative;
+	margin:0px;
+	padding:0px;
+	}
+	
+	#M{
+	background-image:none;
+	border: 1px solid green;	
+	background-color:rgba(250,250,170,0.4);
+	height:20px; 
+	bottom:21px;
+	border-radius: 5px 5px 0px 0px; 
+	}
+	#Mminus{
+	background-image:none;
+	border: 1px solid green;
+	background-color:rgba(250,250,170,0.4);
+	height:20px; 
+	border-radius: 0px 0px 5px 5px; 
+	}
+	#R{
+	background-image:none;
+	border: 1px solid  #CC3300;
+	height:20px; 
+	bottom:21px;
+	background-color:rgba(250,210,250,0.4);
+	border-radius: 5px 5px 0px 0px; 
+	}
+	#Rminus{
+	background-image:none;
+	border: 1px solid #CC3300;
+	background-color:rgba(250,200,250,0.4); 
+	height:20px;  
+	border-radius: 0px 0px 5px 5px;
+
+	}
+	#S{
+	background-image:none;
+	border: 1px solid #9999FF;	
+	height:20px; 
+	bottom:21px;
+	background-color:rgba(190,250,250,0.4);
+	border-radius: 5px 5px 0px 0px; 
+	}
+	#Sminus{
+	background-image:none;
+	border: 1px solid #9999FF;
+	height:20px; 
+	background-color:rgba(190,250,250,0.4);
+	border-radius: 0px 0px 5px 5px; 
+	}
+	#NOplus{
+	background-image:none;
+	border: 1px solid grey;
+	background-color:rgba(230,230,230,0.4);
+	height:20px; 
+	bottom:21px;
+	border-radius: 5px 5px 0px 0px; 
+	}
+	#NOminus{
+	background-image:none;
+	background-color:rgba(230,230,230,0.4);
+	border: 1px solid grey;
+	height:20px;
+	border-radius: 0px 0px 5px 5px; 
+	}
+	.hr {
+	width: 100%;
+	height: 1px;
+	background-color:rgba(200,200,200,0.9);
+	margin: 0px;
+	padding: 0 px;
+	position:relative;
+	left:0px;
+	top:1px;
+	}
+	#container{
+	width:1620px;
+	}
+	.plasmid{}
+#system_div{border:0px solid red; margin:10px;
+overflow:auto;  
+font-size: 0;
+white-space-collapsing:discard;
+}
+</STYLE>
+<!-- we need a function that would evaluate nececary width
+Here we define max length of a system: so far largest Ruegeria TM1040 uid58193 -->
+<div style="width:1600px;  padding: 10px;" > 
+
+
+
+{% if Genome_list %}
+	{% for genome in Genome_list.object_list %}
+        <a class="genome" href="/enzymes/genome/{{ genome.id }}/">{{ genome.formatted_name}}</a>
+        
+        {% for dna in genome.dnapiece_set.all %}
+       
+        <a class="plasmid_name"  href="/enzymes/dna/{{ dna.id }}/">{{dna.name|cut:".ptt" }}</a>
+        
+   
+        <div class="plasmid"  onclick="window.location='/enzymes/dna/{{ dna.id }}/'">
+        	
+        	{% for system in dna.system_set.all %}
+        		<div id="system_desc">
+        		subunit composition: {{system.subunit_composition}} system number:{{system.id}}
+        		</div>
+        		<div id="system_div">
+        		<br>
+        		<div class="hr"></div>
+        		{% for protein in system.protein_set.all %}
+        		<a class="protein" href="/enzymes/protein/{{ protein.id }}/">
+        		<span class="protein" 
+                {%if protein.subunit_kind != "" %}     
+                    {%if protein.subunit_kind == "M" and protein.strand == "+"%}
+                    id="M"        			
+        			{%endif%}          			
+        			{%if protein.subunit_kind == "M" and protein.strand == "-"%} 
+        			id="Mminus" 
+        			{%endif%}             		
+        			{% if protein.subunit_kind == "R" and protein.strand == "+" %}
+        			id="R" 
+        			{%endif%}        		
+        			{% if protein.subunit_kind == "R" and protein.strand == "-" %}
+					id="Rminus" 
+        			{%endif%}        		
+        			{%if protein.subunit_kind == "S" and protein.strand == "+" %}
+        			id="S" 
+        			{%endif%}        		
+        			{%if protein.subunit_kind == "S" and protein.strand == "-" %}
+        			id="Sminus" 
+        			{%endif%}
+title="Size: {{protein.dna_length}} aa
+GI:  {{protein.gene_id}}
+Position:  {{protein.genome_location}}
+Click to get more info"
+
+					{%if protein.system_part == '<System>' or protein.system_part == '<Solitary>' %}
+					style="width:{%widthratio protein.dna_length 15 1%}px; position:relative;margin-left:0px;"><span>{{protein.hammer_cluster|cut:"_HMMER"}}</span> </a>
+        			{%endif%}
+        			{%if protein.system_part != '<System>' and protein.system_part != '<Solitary>'%}
+					style="width:{%widthratio protein.dna_length 15 1%}px; position:relative; margin-left:{{protein.margin_left|anias_div}}px;"><span>{{protein.margin_left}}.</span><span>{{protein.hammer_cluster|cut:"_HMMER"}}</span> </a>
+        			{%endif%}
+        		{%endif%}
+        		{%if protein.subunit_kind == ""%}
+        		<a class="protein" href="/enzymes/protein/{{ protein.id }} /">
+        		<span class="protein"
+        			{%if protein.subunit_kind == ""  and protein.strand == "+"%}
+        			   id="NOplus" 
+        			{%endif%}
+        			{%if protein.subunit_kind == ""  and protein.strand == "-"%}
+        			  id="NOminus"
+        			{%endif%}
+title="Size:         {{protein.dna_length}} aa
+GI:  {{protein.gene_id}}
+Position: {{protein.genome_location}}
+Distance: {{protein.margin_left}}
+{{protein.hh_pfam_desc}}"        			
+        			style="width:{%widthratio protein.dna_length 15 1%}px; position:relative;  margin-left:{{protein.margin_left|anias_div}}px;">
+        			{{protein.margin_left}}
+        			</span></a>
+        		{%endif%}	
+        		{% endfor %} <!--protein--> 	
+        	</div>		 <!--system-->
+        	{% endfor %} <!--system--> 	
+        </div>       <!--DNApiece--> 
+        {% endfor %} <!--DNApiece--> 
+    {% endfor %} <!--genome--> 
+    
+{% else %}
+    <p>No genomes are available.</p>
+{% endif %}
+</table>
+</div>
+{%endblock%}
+
+
+

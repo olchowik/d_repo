@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Hide and Show Javascript Code</title>
+<script language="javascript">
+<!--
+// PLEASE DO NOT REMOVE THIS. THANKS
+// FIND GREATE JAVASCRIPT CODES AT http://www.wallpaperama.com
+var state = 'hidden';
+
+function showhide(layer_ref) {
+
+if (state == 'visible') {
+state = 'hidden';
+}
+else {
+state = 'visible';
+}
+if (document.all) { //IS IE 4 or 5 (or 6 beta)
+eval( "document.all." + layer_ref + ".style.visibility = state");
+}
+if (document.layers) { //IS NETSCAPE 4 or below
+document.layers[layer_ref].visibility = state;
+}
+if (document.getElementById && !document.all) {
+maxwell_smart = document.getElementById(layer_ref);
+maxwell_smart.style.visibility = state;
+}
+}
+//-->
+</script>
+</head>
+
+<body>
+<h1>Hide and Show Javascript Code by <a href="http://www.wallpaperama.com">Wallpaperama.com</a></h1><hr>
+<p>&nbsp;</p>
+<!-- HIDDEN INFORMATION TO BE SHOWN ONCLICK -->
+<div id="agent99" style="position:absolute; top:103px; left:153px;
+visibility:hidden;">
+<H1>Wallpaperama Rocks!!</H1>
+</div>
+<!-- END - HIDDEN INFORMATION TO BE SHOWN ONCLICK -->
+<p>&nbsp;</p>
+<p><a href="javascript://" onclick="showhide('agent99');">click me</a> to see my content!
+</p>
+<p>&nbsp;</p>
+<p align="center">Find Great Web Hosting For Your Site At <a href="http://www.webune.com">Webune.com</a> </p>
+</body>
+</html>

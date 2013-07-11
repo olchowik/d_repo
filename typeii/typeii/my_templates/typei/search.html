@@ -1,0 +1,74 @@
+{% extends "typei/base.html" %}
+{%block head_script%}
+<script>
+$(document).ready(function() {
+	$('li').removeClass('active');
+	$('li[title="search"]').addClass('active');
+	});
+</script>
+{%endblock%}
+{%block maincont%}
+<script language="javascript">
+function adjustDisplayToRadiobuttons() {
+	document.getElementById("hide_both").checked=true
+	document.getElementById("protein_search_form").style.display = "none";
+	document.getElementById("system_search_form").style.display = "none";
+}
+
+function switch_tabs(val) {
+	if (val=="system") {
+		$("#protein_search_form").hide('slow');
+		$("#system_search_form").show('slow');
+		}
+	else if (val=="protein") {
+		$("#protein_search_form").show('slow');
+		$("#system_search_form").hide('slow');
+		}
+}
+function show(val) {
+	if (val=="dna"){val='DNA_file'}
+	$selected=$('#'+val);
+	$selected.show('slow');
+	$('#genome, #DNA_file, #system').not($selected).hide('slow');	
+}
+
+$(document).ready(function() {
+	$('ul:first a[title="search"]').addClass('active');
+	adjustDisplayToRadiobuttons();
+});
+</script>
+<style>
+</style>
+<div id="serch_all" >
+
+<div id="tab" >
+<form  method="GET" >
+<input type="radio" id="hide_both" checked name="tab"  value="hide_both"  style="display:none"/>
+<input type="radio" id="system_radio" name="tab"  value="system"  onclick=" switch_tabs(this.value)" />Filter Systems
+<input type="radio" id="protein_radio" name="tab" value="protein"  onclick="switch_tabs(this.value)" />Filter Proteins
+</form>
+</div>
+
+{% include "typei/searchProteinFieldSet.html" %}
+{% include "typei/searchSystemsFieldSet.html" %}
+</div>
+
+{% if query %}
+<h2>Results for "
+	{% for field in filled %}
+		{{ field }} 
+	{% endfor %}":</h2>
+    {% if result %}
+        <ul>
+        {% for protein in result %}
+        {% include 'typei/proteinDetailsShorter.html'%}
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No proteins found</p>
+    {% endif %}
+{% endif %}
+{%if not query%}
+<div id="filler" style="height:200px;"></div>
+{%endif%}
+{%endblock%}

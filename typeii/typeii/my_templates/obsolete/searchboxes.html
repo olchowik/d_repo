@@ -1,0 +1,167 @@
+<html>
+<script language="javascript">
+function showhide(box1, checked) {
+	if (checked == false) {
+		box1.style.display = "none";
+		box2.style.display = "none";
+		box3.style.display = "none";
+	}
+	else {
+		box1.style.display = "block";
+		box2.style.display = "block";
+		box3.style.display = "block";
+	}
+}
+</script>
+
+<Style>
+
+
+.hidden{
+border-radius: 10px 10px 10px 10px; 
+border:1px dotted rgb(77, 202, 9); 
+padding-top:2px;
+padding-bottom:8px;
+padding-right:1px;
+padding-left:6px;
+margin-right:4px;
+margin-left:4px;
+margin-bottom:10px;
+}
+.styled{
+border-radius: 10px 10px 10px 10px; 
+border:10px dotted rgb(77, 202, 9);
+}
+div#searchboxes{
+padding:2px;
+font-size:13px;
+color: rgb(120, 120, 120);
+text-align:center;
+}
+h2{
+color:rgb(120, 120, 120);
+}
+fieldset.wrapper{
+display:none;
+padding:0px;
+margin:0px;
+border:0px solid blue;
+}
+select { 
+padding:4px;
+margin:4px;
+}
+.form_wrapper{
+padding-left:40px; 
+text-align:left; 
+font-size:18px; 
+color:rgb(120, 120, 120);
+}
+</Style>
+
+<br>
+<h2 style="color: rgb(120, 120, 120);">Display </h2>
+<form action="/enzymes/formtest" method="post">
+{% csrf_token %}
+<div id="searchboxes" >
+<input type="radio" name="display" value="schematic" checked/>basic
+<input type="radio" name="display" value="detailed" />details<br>
+<br>
+<form>
+<h2><input type="checkbox" name="filter" value="filter"  onclick="showhide(searchBox, this.checked)"/> Filter </h2>
+
+<fieldset class="wrapper" id="searchBox" >
+Gene clusters containing:<br>
+<fieldset class="hidden" id="MsearchBox" >
+<legend> hsdM</legend>
+amount: 
+<select name="Mnum" >
+  <option value="0">0</option>
+  <option selected value="0_or_more">0 or more</option>
+  <option value="1">1</option>
+  <option value="1_or_more">1 or more</option>
+  <option value="2">2</option>
+  <option value="2_or_more">2 or more</option>
+  <option value="3">3</option>
+  <option value="3_or_more">3 or more</option>
+</select><br>
+family:
+<select name="Mfam">
+  <option value="">any</option>
+  <option value="A">A</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="D">D</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+  <option value="H">H</option>
+  <option value="extra">extra</option>
+  <option value="NF">not found</option>
+</select>
+</fieldset>
+<fieldset class="hidden" id="RsearchBox">
+<legend> hsdR</legend>
+amount: 
+<select name="Rnum">
+  <option value="0">0</option>
+  <option selected value="0_or_more">0 or more</option>
+  <option value="1">1</option>
+  <option value="1_or_more">1 or more</option>
+  <option value="2">2</option>
+  <option value="2_or_more">2 or more</option>
+  <option value="3">3</option>
+  <option value="3_or_more">3 or more</option>
+</select><br>
+family:
+<select name="Rfam">
+  <option value="">any</option>
+  <option value="A">A</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="D">D</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+  <option value="H">H</option>
+  <option value="extra">extra</option>
+  <option value="NF">not found</option>
+</select>
+</fieldset>
+<fieldset class="hidden" id="SsearchBox" >
+<legend> hsdS</legend>
+amount: 
+<select name="Snum">
+  <option value="0">0</option>
+  <option selected value="0_or_more">0 or more</option>
+  <option value="1">1</option>
+  <option value="1_or_more">1 or more</option>
+  <option value="2">2</option>
+  <option value="2_or_more">2 or more</option>
+  <option value="3">3</option>
+  <option value="3_or_more">3 or more</option>
+</select><br>
+family:
+<select name="Sfam">
+  <option value="">any</option>
+  <option value="A">A</option>
+  <option value="B">B</option>
+  <option value="C_">C</option>
+  <option value="C1">C1</option>
+  <option value="C">C+C1</option>
+  <option value="DH">DH</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+  <option value="extra">extra</option>
+  <option value="NF">not found</option>
+</select>
+</fieldset>
+</fieldset>
+<div style="text-align:center">
+<input class="sbutton"  width="70px" type="submit" value="Submit" />
+</div>
+</form> 
+
+</div>
+</html>

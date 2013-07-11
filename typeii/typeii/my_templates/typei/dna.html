@@ -1,0 +1,78 @@
+{% extends "typei/base.html" %}
+{%block  maincont%}
+{% load typei_extras %}
+<br>
+<div style="width:100%;  padding: 10px;" > 
+{% if dna%}   
+        <a class="plasmid_name"  href="/enzymes/dna/{{ dna.id }}/">{{dna.name|cut:".ptt" }}</a>
+        <div class="plasmid"  >
+        	
+        	{% for system in dna.system_set.all %}<div style="border:0px solid red; margin:10px";>
+        	   
+        		<a href='/enzymes/system/{{system.id}}/'>subunit composition: {{system.subunit_composition}} system number:{{system.id}} classified as:{{system.system_kind}}</a>
+        		<br>
+        		
+        		{% for protein in system.protein_set.all %}
+        		<a class="protein" HREF='#{{ protein.id }}'/>
+        		<span class="protein" 
+                {%if protein.subunit_kind != "" %}     
+                    {%if protein.subunit_kind == "M" and protein.strand == "+"%}      
+        			id="M"        			
+        			{%endif%}          			
+        			{%if protein.subunit_kind == "M" and protein.strand == "-"%} 
+        			id="Mminus" 
+        			{%endif%}             		
+        			{% if protein.subunit_kind == "R" and protein.strand == "+" %}
+        			id="R" 
+        			{%endif%}        		
+        			{% if protein.subunit_kind == "R" and protein.strand == "-" %}
+					id="Rminus" 
+        			{%endif%}        		
+        			{%if protein.subunit_kind == "S" and protein.strand == "+" %}
+        			id="S" 
+        			{%endif%}        		
+        			{%if protein.subunit_kind == "S" and protein.strand == "-" %}
+        			id="Sminus" 
+        			{%endif%}
+title="Size:         {{protein.dna_length}} aa
+Position: {{protein.genome_location}}
+Click to get more info"
+				style="width:{%widthratio protein.dna_length 15 1%}px;">
+				{{protein.hammer_cluster|cut:"_HMMER"}}</span> </a>
+        		{%endif%}
+        		{%if protein.subunit_kind == ""%}
+        		<a class="protein" href="/enzymes/protein/{{ protein.id }} /">
+        		<span class="protein"
+        			{%if protein.subunit_kind == ""  and protein.strand == "+"%}
+        			   id="NOplus" 
+        			{%endif%}
+        			{%if protein.subunit_kind == ""  and protein.strand == "-"%}
+        			  id="NOminus"
+        			{%endif%}
+title="Size:         {{protein.dna_length}} aa
+Position: {{protein.genome_location}}
+{{protein.hh_pfam_desc}}"        			
+        			style="width:{%widthratio protein.dna_length 15 1%}px;">
+        			X
+        			</span></a>
+        		{%endif%}	
+        		{% endfor %} <!--protein--> 	
+        	</div>		 <!--system-->
+        	{% endfor %} <!--system--> 	
+        </div>       <!--DNApiece-->  
+<div style="padding:15px 0px 0px 45px; font-size:18px; color:rgb(120,120,120);">
+Genome: <a class="genome" href="/enzymes/genome/{{ dna.genome.id }}/">{{dna.genome.name|process_genome_name}}</a>
+</div>
+{% else %}
+    <p>No DNA are available.</p>
+{% endif %}
+    
+</table>
+</div>	
+{% for system in dna.system_set.all %}
+	{% for protein in system.protein_set.all %}
+		{%include 'typei/proteinDetailsShort.html'%}
+	{% endfor %}
+{% endfor %}
+
+{%endblock%}

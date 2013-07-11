@@ -1,0 +1,281 @@
+{% include "typei/prefix.html " %}
+<div style="width:800px;  padding: 10px;" >
+<STYLE type="text/css">
+	span.protein {
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	border:1px solid green;
+	height:20px;
+	display:inline-block;
+	text-align: center; 
+	}
+	
+	#M{background-image:url('{{MEDIA_URL}}/images/protein/M.jpg/');}
+	#Mminus{background-image:url('{{MEDIA_URL}}/images/protein/Mminus.jpg/');}
+	#R{background-image:url('{{MEDIA_URL}}/images/protein/R.jpg/');}
+	#Rminus{background-image:url('{{MEDIA_URL}}/images/protein/Rminus.jpg/');}
+	#S{background-image:url('{{MEDIA_URL}}/images/protein/S.jpg/');}
+	#Sminus{background-image:url('{{MEDIA_URL}}/images/protein/Sminus.jpg/');}
+	#NO{}
+	#NOminus{background-image:url('{{MEDIA_URL}}/images/protein/NOminus.jpg/');}
+
+</STYLE>
+
+<!-- STATS: Time to display page: %(totTime).2f Time for python scripts: %(pyTime).2f Time for DB acces: %(dbTime).2f Queries: %(queries)d -->
+
+{% if Genome_list %}
+    {% for genome in Genome_list %}
+        <a href="/enzymes/genome/{{ genome.id }}/">{{ genome.formatted_name}}</a>
+        
+        {% for dna in genome.dnapiece_set.all %}
+        <div style="margin-left: 38px; margin-bottom:-12px; ">
+        <a style="color: rgb(140, 145, 145); " href="/enzymes/dna/{{ dna.id }}/">{{dna.name}}</a>
+        </div>
+        <div style=" background-color:#feffff;border:1px solid rgb(240, 240, 240); box-shadow:0px 0px 4px rgb(200, 195, 195); margin: 8px; margin-top: 0px; margin-left:20px;  border-radius: 0px 25px 0px 25px; padding: 10px;">
+        	
+        	{% for system in dna.system_set.all %}<div style="border:0px solid red; margin:10px";>
+        	   
+        		subunit composition: {{system.subunit_composition}} system number:{{system.id}} classified as:{{system.system_kind}}
+        		<br>
+        		
+        		{% for protein in system.protein_set.all %}
+                    
+                    {%if protein.subunit_kind == "M" and protein.strand == "+"%} 
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein" id="M" style="width:{%widthratio protein.dna_length 15 1%}px;">
+        			{{protein.hammer_cluster|cut:"_HMMER"}}
+        			</span> </a>
+        			{%endif%}  
+        			{%if protein.subunit_kind == "M" and protein.strand == "-"%} 
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein" id="Mminus" style="width:{%widthratio protein.dna_length 15 1%}px;">
+        			{{protein.hammer_cluster|cut:"_HMMER"}}
+        			</span> </a>
+        			{%endif%}     
+        			{% if protein.subunit_kind == "R" and protein.strand == "+" %}
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein" id="R" style="border:1px solid red;width:{%widthratio protein.dna_length 15 1%}px;">
+        			{{protein.hammer_cluster|cut:"_HMMER"}}
+        			</span></a>
+        			{%endif%}
+        			{% if protein.subunit_kind == "R" and protein.strand == "-" %}
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein" id="Rminus" style="border:1px solid red;width:{%widthratio protein.dna_length 15 1%}px;">
+        			{{protein.hammer_cluster|cut:"_HMMER"}}</a>
+        			</span></a>
+        			{%endif%}
+        			{%if protein.subunit_kind == "S" and protein.strand == "+" %}
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein" id="S" style="border:1px solid blue; width:{%widthratio protein.dna_length 15 1%}px;">
+        			{{protein.hammer_cluster|cut:"_HMMER"}}</a>
+        			</span></a>
+        			{%endif%}
+        			{%if protein.subunit_kind == "S" and protein.strand == "-" %}
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein" id="Sminus" style="border:1px solid blue; width:{%widthratio protein.dna_length 15 1%}px;">
+        			{{protein.hammer_cluster|cut:"_HMMER"}}</a>
+        			</span></a>
+        			{%endif%}
+        		
+        			{%if protein.subunit_kind == ""  and protein.strand == "+"%}
+        			<a href="/enzymes/protein/{{ protein.id }} /">
+        			<span class="protein"   style="background-image:url('{{MEDIA_URL}}/images/protein/NO.jpg/');border:1px solid grey;width:{%widthratio protein.dna_length 15 1%}px;">
+        			X
+        			</span></a>
+        			
+        			{%endif%}
+        			{%if protein.subunit_kind == ""  and protein.strand == "-"%}
+        			<a href="/enzymes/protein/{{ protein.id }}/">
+        			<span class="protein"  id="NOminus" style="background-image:url('{{MEDIA_URL}}/images/protein/NO.jpg/');border:1px solid grey;width:{%widthratio protein.dna_length 15 1%}px;">
+        			X
+        			</span></a>
+        			{%endif%}
+        			
+        		{% endfor %} <!--protein--> 	
+        	</div>		 <!--system-->
+        	{% endfor %} <!--system--> 	
+        </div>       <!--DNApiece--> 
+        {% endfor %} <!--DNApiece--> 
+    {% endfor %} <!--genome--> 
+    
+{% else %}
+    <p>No genomes are available.</p>
+{% endif %}
+</table>
+</div>
+{% include "typei/suffix.html " %}
+
+function setLength($l){
+$length=$l/5;
+return $length;
+}
+function setMRSColor($MRS, $direction, $class){
+$color='black';
+
+if($MRS=='M' AND $direction=='+' ){$color='green';}
+else  if($MRS=='R' AND $direction=='+' ){$color='red';}
+else  if($MRS=='S' AND $direction=='+' ){$color='blue';}
+else if($MRS=='M' AND $direction=='-' ){$color='greenMinus';}
+else  if($MRS=='R' AND $direction=='-' ){$color='redMinus';}
+else  if($MRS=='S' AND $direction=='-' ){$color='blueMinus';}
+return $color;
+}
+function printVoid($previousPos, $currentPos, $info){
+$noVoid=$currentPos-$previousPos;
+$noVoid=abs($noVoid );
+	$color='minusNone';
+//get info from mysql about the colors (directions)
+$otherDirection = explode('|', $info['otherDirection']);
+//get info from mysql about the size of this gene
+$otherLength = explode('|', $info['otherLength']);
+	for ($i = 1; $i < $noVoid; $i++) {
+	$dir=$otherDirection[$i];
+	if ($dir=='-'){$color='minusNone';}
+	else if ($dir=='+'){$color='None';}
+	$length=$otherLength[$i]/5;	
+	Print "<span  class='notTypeI'  id='".$color."'  style='width:".$length."px;'>.</span>";
+	}
+}
+?>
+<html>
+
+<STYLE type="text/css">
+	span {
+	margin-bottom:15px; 
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	}
+    .sys {
+	margin:1px; 
+	text-align:center;
+	padding:1px 2px 2px 1px;
+	font-size:120%;
+	display: inline-block; 
+	width: 60px;
+	}  
+	.notTypeI {
+	margin:1px; 
+	text-align:center;
+	padding:1px 2px 2px 2px;
+	margin-right:2px;
+	font-size:120%;
+	color:#ffffff;
+	display: inline-block; 
+	width: 20px;
+	
+	}  
+   #red {
+	//border: 1px solid red;
+	background-image:url('R.jpg');	
+   }
+    #green {
+	background-image:url('M.jpg');	
+   }
+    #blue{
+	background-image:url('S.jpg');	
+   }
+     #redMinus {
+	background-image:url('minusR.jpg');	
+   }
+    #greenMinus {
+	background-image:url('minusM.jpg');	
+   }
+    #blueMinus{
+	background-image:url('minusS.jpg');	
+   }
+   #NO{
+	background-image:url('NO.jpg');	
+   }
+   #minusNO{
+	background-image:url('minusNO.jpg');	
+   }
+   #None{
+	background-image:url('none.bmp');	
+   }
+   #minusNone{
+	background-image:url('minusNone.bmp');	
+   }
+   #NoneArrows{
+	background-image:url('minusNne.bmp');	
+	border: 1px solid grey;
+	height: 0px;
+	padding: 0px;
+	margin: 0px;
+	margin-top: 15px;
+   }
+   #minusNoneArrows{
+	background-image:url('minusNne.bmp');	
+	border: 1px solid grey;
+	padding: 0px;
+	margin: 1px;
+	margin-top: 15px;
+	padding-top: 15px;
+	height: 0px;
+   }
+</STYLE>
+</html>
+<?
+
+//$data = generateData();
+function printWebPage($data){
+
+
+	//start table
+	Print "<table border cellpadding=3 style='border:0px dashed black;'>"; 
+
+
+
+
+//if new genome
+			Print "<h3>Genome: ".$info['Genome'];
+			Print "  no: ".$info['genomeNO']."</h3>"; 
+			
+// opening remarks ,a row to insert systems
+			
+			$length=setLength($info['length']);
+			$color=setMRSColor($info['kind'],$info['direction'],$info['SystemKind']);
+//print a system
+			if($info['systemPart']=='<System>'){
+			//tab
+			Print "<span style='display: inline-block; width: 25px;'></span>";
+			Print "System:  <b>".$info['composition']. "</b>  no: ".$info['systemNO']."  classified as: ".$info['SystemKind']."<br>" ;
+			//start
+			
+			Print "<div style='; padding:8px;'>   ";
+		
+			//tab
+			Print "<span style='display: inline-block; width: 20px;'></span>";
+			
+			Print "<span class='sys' id='".$color."' style='width:".$length."px;'> ".str_replace ('_HMMER' , '',$info['HMMERcluster'])." </span>" ;
+			$previousPos=$info['posInGenome'];
+		
+			}//if
+			else if($info['systemPart']=='<middle>'){
+			$currentPos=$info['posInGenome'];
+			printVoid($previousPos, $currentPos, $info);
+
+			Print "<span class='sys' id='".$color."' style='width:".$length."px;'> ".str_replace ('_HMMER' , '',$info['HMMERcluster'])." </span>" ;
+			$previousPos=$info['posInGenome'];
+			}//if
+			else if($info['systemPart']=='</System>'){
+			
+			Print "<span class='sys' id='".$color."' style='width:".$length."px;'>".str_replace ('_HMMER' , '',$info['HMMERcluster'])." </span>";
+			//stop
+			Print "</div>" ;
+			}//if
+			else if($info['systemPart']=='<Solitary>'){
+			//tab
+			Print "<span class="protein" style='display: inline-block; width: 25px;'></span>";
+			Print "Solitary:  <b>".$info['composition']. "</b>  no: ".$info['systemNO']."<br>" ;
+			
+			Print "<div style=' padding:8px;'> ";
+			//tab
+			Print "<span style='display: inline-block; width: 25px;'></span>";
+			Print "<span class='sys' id='".$color."' style='width:".$length."px;'> ".str_replace ('_HMMER' , '',$info['HMMERcluster'])." </span></div>" ;
+			
+			}//if			
+			
+		}//while
+	//stop table
+	Print "</table>"; 
+}//function

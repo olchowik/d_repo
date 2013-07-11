@@ -1,0 +1,40 @@
+table,th, td{
+border-collapse:collapse;
+border:1px solid rgb(77, 202, 9);
+
+}
+table{
+width:700px;
+margin-left:auto; 
+margin-right:auto;
+}
+td{
+text-align:center;
+padding:5px;
+}
+tr{}
+tr.alt{ 
+background-color: #f5fefd;
+}
+td.sequence{
+text-align:left; 
+padding:5px 25px 5px 25px; 
+text-align:justify; 
+font-family:monospace;
+}
+
+th.sequence{
+background-color:rgb(234, 242, 211);
+text-align:left;
+padding:5px;
+color:rgb(70, 70, 70)
+}
+
+a.rollover img {
+	height:28px;
+	width:35px;
+}
+a.rollover:hover > img {
+	height: 30px;
+	width:35px;
+}

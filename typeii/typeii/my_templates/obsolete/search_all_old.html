@@ -1,0 +1,75 @@
+<html>
+<style type="text/css">
+body { color: #efd; background: #453; padding: 0 5em; margin: 0 }
+h1 { padding: 2em 1em; background: #675 }
+h2 { color: #bf8; border-top: 1px dotted #fff; margin-top: 2em }
+p { margin: 1em 0 }
+</style>
+<body>
+<h1>Search Protein</h1>
+
+<!-- <form action="searchAll" method="GET">
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Search">
+</form>
+--!>
+
+<form action="searchAll" method="GET">
+	<table>
+		<tr><td><label for="genome">Genome:</label></td>
+			<td>{{ form.genome }}</td>
+		</tr>
+		<tr><td><label for="dnapiece">DNA piece:</label></td>
+			<td>{{ form.dnapiece }}</td>
+		</tr>
+	</table>
+	<label for="system">System:</label>
+			{{ form.system }}
+	<table>
+		</tr>
+        <tr><td><label for="gene_id">Gene id:</label></td>
+        	<td>{{ form.gene_id }}</td>
+        	<td><label for="margin_left">Margin left:</label></td>
+        	<td>{{ form.margin_left }}</td>
+        	<td><label for="system_part">System part:</label></td>
+        	<td>{{ form.system_part }}</td>
+        </tr>
+        <tr>
+        	<td><label for="subunit_kind">Subunit kind:</label></td>
+        	<td>{{ form.subunit_kind }}</td>
+        	<td><label for="hammer_cluster">Hammer cluster:</label></td>
+        	<td>{{ form.hammer_cluster }}</td>
+        	<td><label for="hh_pfam_id">HH Pfam id:</label></td>
+        	<td>{{ form.hh_pfam_id }}</td>
+        </tr>
+        <tr>
+        	<td><label for="aa_sequence">AA sequence:</label></td>
+        	<td>{{ form.aa_sequence }}</td>
+        	<td><label for="hh_pfam_desc">HH Pfam description:</label></td>
+        	<td>{{ form.hh_pfam_desc }}</td>
+        </tr>
+	</table>
+<input type="submit" value="Search">
+</form>
+
+{% if query %}
+<h2>Results for "
+	{% for field in filled %}
+		{{ field }} 
+	{% endfor %}":</h2>
+    {% if result %}
+        <ul>
+        {% for protein in result %}
+            <li>{{ protein|escape }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No proteins found</p>
+    {% endif %}
+{% endif %}
+
+
+</body>
+</html>

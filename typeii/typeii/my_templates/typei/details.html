@@ -1,0 +1,50 @@
+{% extends "typei/prefix.html" %}
+{%block leftMenue%}
+<pre>
+Some
+Text
+Goes
+Here!
+! !
+</pre>
+{%endblock%}
+{%block content%}
+<div style="width:800px;  padding: 10px;" >
+<!-- STATS: Time to display page: %(totTime).2f Time for python scripts: %(pyTime).2f Time for DB acces: %(dbTime).2f Queries: %(queries)d -->
+
+
+{% if Genome_list %}
+    <ul>
+    {% for genome in Genome_list %}
+        <li><a href="/enzymes/genome/{{ genome.id }}/">{{ genome.id }}</a>
+        {{ genome.name }}
+        </li>
+        <ul>
+        {% for dna in genome.dnapiece_set.all %}
+        	<li><a href="/enzymes/dna/{{ dna.id }}/">{{dna.id}}</a>
+        	{{dna.name}}
+        	</li>
+        	<ul>
+        	{% for system in dna.system_set.all %}
+        		<li><a href="/enzymes/system/{{ system.id }}/">{{system.id}}</a>
+        		{{system.subunit_composition}}
+        		</li>
+        		<ul>
+        		{% for protein in system.protein_set.all %}
+        			<li><a href="/enzymes/protein/{{ protein.id }}/">{{protein.id}}</a>
+        			{{protein.gene_id}}
+        			</li>
+        		{% endfor %} <!--protein--> 
+        		 </ul>
+        	{% endfor %} <!--system--> 	
+        	 </ul>
+        {% endfor %} <!--DNApiece--> 
+        </ul>
+    {% endfor %} <!--genome--> 
+    </ul>
+{% else %}
+    <p>No genomes are available.</p>
+{% endif %}
+</div>
+{%endblock%}
+{% include "typei/suffix.html " %}

@@ -1,0 +1,49 @@
+{% extends "typei/base.html" %}
+{%block head_script%}
+<script>
+$(document).ready(function() {
+	$('li').removeClass('active');
+	$('li[title="home"]').addClass('active');
+
+	
+	$("#grid").grid2d({
+	    easing: 'easeOutQuad',
+	    animationSpeed: 300,
+	    rows: 2,
+	    backgroundColor: '#000',
+	    columns: 3,
+	    cellWidth: 332,
+	    cellHeight: 200,
+	    cellSpacingH: 1,
+	    cellSpacingV: 1,
+	    growH: 100,
+	    growV: 100,
+	    caption: {
+	        backgroundColor: '#000',
+	        opacity: 0.8
+	    }
+	});
+	$("#grid").css({'border':'none','padding':'0px','box-shadow':'none','background-color':'#bbb'}); 
+	$("#grid li").css({'border':'none','padding':'0px','margin':'0px', 'background-color':'#fff'});
+	$("#grid ").css({'border':'none','padding':'0px','box-shadow':'none'}); 
+	$("#maincont").css({'opacity':'1','padding':'0px', 'margin-top':'0px', 'background-color':'white'});
+	$(".cell").css({'cursor':'pointer'})
+	$(".cell").click(function() {
+		  var gotolink=$(this).children(0).children(0).attr('go');
+		  window.location=gotolink;
+	});
+   });
+</script>
+{%endblock%}
+{%block maincont%}
+
+  <ul id="grid">
+        <li ><img src="{{MEDIA_URL}}images/core/icons/browse.png" alt="<span go='/enzymes/browse'>Browse</span>" /></li>
+        <li ><img src="{{MEDIA_URL}}images/core/icons/home.png" alt="<span go='/enzymes/base'>Home</span>" /></li>
+        <li ><img src="{{MEDIA_URL}}images/core/icons/search.png" alt="<span go='/enzymes/searchAll'>Search</span>" /></li>
+        <li ><img src="{{MEDIA_URL}}images/core/icons/user.png" alt="<span go='/enzymes/credits'>Credits</span>" /></li>
+        <li ><img src="{{MEDIA_URL}}images/core/icons/stars.png" alt="<span go='/enzymes/calculate_order'>Stats</span>" /></li>
+        <li ><img src="{{MEDIA_URL}}images/core/icons/admin.png" alt="<span go='/admin'>Admin</span>" /></li>
+   </ul> 
+{%endblock%}
+      

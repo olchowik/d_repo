@@ -1,0 +1,61 @@
+<style>
+#genome, #DNA_file, #system{
+padding:0px;
+margin:0px;
+border:none;
+}
+#DNA_file, #system{
+display:none;
+}
+select[name="system"]{
+width:600px;
+}
+
+</style>
+<div class="form_wrapper" style="line-height:150%"><br>
+<form id="protein_search_form"  action="searchAll" method="GET" >
+<input type="radio" checked  name="gds" value="genome"  onclick="show(this.value)" />Genome
+<input type="radio" name="gds" value="dna"  onclick="show(this.value)"/>DNA file
+<input type="radio" name="gds" value="system" onclick="show(this.value)" />System<br>
+
+<fieldset id="genome" >
+Genome: {{ form.genome }}<br>
+</fieldset>
+
+<fieldset id="DNA_file" >
+DNA piece: {{ form.dnapiece }}<br>
+</fieldset>
+
+<fieldset id="system" >
+System: {{ form.system }}<br>
+</fieldset>
+	
+	<table>
+		</tr>
+        <tr><td><label for="gene_id">Gene id:</label></td>
+        	<td>{{ form.gene_id }}</td>
+        	<td><label for="margin_left">Margin left:</label></td>
+        	<td>{{ form.margin_left }}</td>
+        	<td><label for="system_part">System part:</label></td>
+        	<td>{{ form.system_part }}</td>
+        </tr>
+        <tr>
+        	<td><label for="subunit_kind">Subunit kind:</label></td>
+        	<td>{{ form.subunit_kind }}</td>
+        	<td><label for="hammer_cluster">Family:</label></td>
+        	<td>{{ form.hammer_cluster }}</td>
+        	<td><label for="hh_pfam_id">Pfam id:</label></td>
+        	<td>{{ form.hh_pfam_id }}</td>
+        </tr>     
+	</table>
+	<table>
+		   <tr>
+        	<td><label for="aa_sequence">AA sequence:</label>{{ form.aa_sequence }}</td>
+        	<td><label for="hh_pfam_desc">Pfam description:</label>{{ form.hh_pfam_desc }}</td>
+        </tr>
+	</table>
+<div style="text-align:center; margin-left:-40px;">
+<input class="sbutton"  type="submit" value="Search" />
+</div>
+</form>
+</div>

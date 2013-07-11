@@ -1,0 +1,150 @@
+{% extends "typei/base.html" %}
+{%block head_script%}
+<script type="text/javascript" src="{{MEDIA_URL}}jscript/jquery-1.8.3.min.js"></script>
+<!-- [if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
+<script type="text/javascript" src="{{MEDIA_URL}}amcharts/amcharts/amcharts.js"></script>
+<!-- link rel="stylesheet" href="{{MEDIA_URL}}amcharts/style.css" type="text/css"> -->
+<script type="text/javascript">
+var chart;
+//var chartData =[{ country: "RMS", visits: 177, color: "#CD0D74" },{ country: "RSM", visits: 77, color: "#CD0D74" },{ country: "MSR", visits: 517, color: "#CD0D74" },{ country: "SMR", visits: 2, color: "#CD0D74" },{ country: "MRS", visits: 3, color: "#CD0D74" },{ country: "SRM", visits: 1, color: "#CD0D74" }];
+var order_MRS_Data ={{order_MRS_dict|safe}}
+var order_MRS_fam_Data={{order_MRS_fam_dict|safe}}
+var solitary_Data={{solitary_dict|safe}}
+var crazy_Data={{crazy_dict|safe}}
+var pairwise_overlap_Data={{pairwise_overlap|safe}}
+var length_Data={{length_dict|safe}}
+pie_chart_factory=function(dataProvider,categoryField,valueField,title, div_id){
+    chart = new AmCharts.AmPieChart();
+    chart.dataProvider = dataProvider;
+    chart.titleField = categoryField;
+    chart.valueField = valueField;
+    chart.outlineColor = "#FFFFFF";
+    chart.outlineAlpha = 0.8;
+    chart.outlineThickness = 2;
+    // WRITE
+    chart.write(div_id);
+	
+}
+chart_factory = function(dataProvider,categoryField,valueField,title, div_id) {
+	chart = new AmCharts.AmSerialChart();
+    chart.dataProvider = dataProvider; chart.categoryField = categoryField;  
+    chart.startDuration = 1;
+    // AXES// category
+    var categoryAxis = chart.categoryAxis;
+    categoryAxis.labelRotation = 45;
+    //categoryAxis.gridAlpha = 0; 
+    categoryAxis.fillAlpha = 1; 
+    categoryAxis.fillColor = "#FAFAFA";
+    categoryAxis.gridPosition = "start";
+    // value
+    var valueAxis = new AmCharts.ValueAxis();valueAxis.dashLength = 5;
+    //valueAxis.axisAlpha = 0;
+    chart.addValueAxis(valueAxis);
+    valueAxis.title = title
+    
+    var graph = new AmCharts.AmGraph(); 
+    graph.balloonText = "[[category]]: [[value]]";graph.type = "column";graph.lineAlpha = 0;graph.fillAlphas = 1;
+    graph.valueField = valueField; graph.colorField = "color"; chart.addGraph(graph);
+    chart.write(div_id);
+    //need a neat little initialise function to create some html elements here! 
+}
+AmCharts.ready(function () {
+    // SERIAL CHART
+    //chart = new AmCharts.AmSerialChart();
+    //chart.dataProvider = order_MRS_Data; chart.categoryField = "country";
+   // var graph = new AmCharts.AmGraph(); 
+    //graph.balloonText = "[[category]]: [[value]]";graph.type = "column";graph.lineAlpha = 0;graph.fillAlphas = 1;
+   // graph.valueField = "visits"; graph.colorField = "color"; chart.addGraph(graph);
+   // chart.write("order_MRS");
+
+
+    pie_chart_factory(order_MRS_Data,"country","visits","title", "order_MRS");
+    chart_factory(order_MRS_fam_Data,"country","visits","title", "order_MRS_fam");
+    chart_factory(solitary_Data,"country","visits","title", "solitary");
+    chart_factory(crazy_Data,"country","visits","title", "crazy");
+    chart_factory(pairwise_overlap_Data,"country","visits","title", "pairwise_overlap");
+    chart_factory(length_Data,"country","visits","title", "length");
+});
+
+    $(document).ready(function(){
+    	$('li').removeClass('active');
+	    $('li[title="stats"]').addClass('active');
+	    //$("tspan:contains('amcharts.com')" ).text('xx');
+	    
+    });
+    </script>
+{%endblock%}
+{%block  maincont%}
+<style>
+#chart2{
+//display:inline-block;
+//float:left;
+}
+#chart1{
+//display:inline-block;
+//float:right;
+
+}
+#chart3, #chart0{
+//display:inline-block;
+}
+</style>
+<center>
+{{order_MRS_dict|safe}}
+<div id="order_MRS" style="width: 600px; height: 400px;"></div>
+<div id="order_MRS_fam" style="width: 600px; height: 400px;"></div>
+<div id="solitary" style="width: 600px; height: 400px;"></div>
+<div id="crazy" style="width: 600px; height: 400px;"></div>
+<div id="pairwise_overlap" style="width: 600px; height: 400px;"></div>
+<div id="length" style="width: 600px; height: 400px;"></div>
+<h3>Distribution of MSR subunits. </h3>
+<h4>Type I systems tend to consict of one hsdM, one hsdS and one hsdR. All other cases has been analysed here. First the occurence of subunits that do not form type I system judging only by genomic proximity of other type I subunits. Most frequently we can encounter solitary hsdS subunits (S, SS), and hsdS+hsdM subunits without hsdR anywhere around (MS). Solitary R subunits are not uncomon (R), also they occur more frequently accompanied by hsdS (RS) than hsdM (MR).</h4>
+<div id="chart0" style="height: 300px; width: 50%;">
+</div><br>
+<h4>Type I systems consisting of more than one hsdM, one hsdS and one hsdR are quite frequent. In over 60% of cases there are only additional hsdS subunits present. M subunit is duplicated in 12%, also in 12% has hsdM and hsdS subunit duplicated. Duplication of hsdR subunit is allways associated with multiplication of hsdM or hsdS subunit. HsdS subunit can be multiplicated up tp 20 times in a single system</h4>
+<div id="chart1" style="height: 300px; width: 50%;">
+</div><br>
+<h3>Subunits order on the DNA strand</h3>
+<h4>Order of type I subunit coding genes on DNA strand was analysed in systems consisting of one hsdM one hsdS and one hsdR subunit. Out of six possible gene orders MSR is the most frequent one.</h4>
+<div id="chart2" style="height: 300px; width: 50%;">
+
+</div><br>{MSR: 517, RMS: 177, RSM: 77, MRS: 3,SMR: 2, SRM: 1}<br>
+<h4>Systems that were classified to different families have different gene orders. e.g.  99% of systems classified to families D and F have MSR gene order.</h4>
+<div id="info3"></div>
+<div id="chart3" style="height:400px;width:800px;border:none; "></div> 
+</center>
+<br>
+<!--  
+<span class='legend'>RMS:{{RMS}} </span>
+<span class='legend'>RSM:{{RSM}}</span>
+<span class='legend'>MSR:{{MSR}}</span>
+<span class='legend'>SMR:{{SMR}}</span>
+<span class='legend'>MRS:{{MRS}}</span>
+<span class='legend'>SRM:{{SRM}}</span>
+<div>
+
+<pre>
+            var rms=[{{ARMS}},{{BRMS}},{{CRMS}},{{DRMS}},{{ERMS}},{{FRMS}},{{GRMS}},{{HRMS}}];
+			var rsm=[{{ARSM}},{{BRSM}},{{CRSM}},{{DRSM}},{{ERSM}},{{FRSM}},{{GRSM}},{{HRSM}}];
+			var msr=[{{AMSR}},{{BMSR}},{{CMSR}},{{DMSR}},{{EMSR}},{{FMSR}},{{GMSR}},{{HMSR}}];
+			var mrs=[{{AMRS}},{{BMRS}},{{CMRS}},{{DMRS}},{{EMRS}},{{FMRS}},{{GMRS}},{{HMRS}}];
+			var smr=[{{ASMR}},{{BSMR}},{{CSMR}},{{DSMR}},{{ESMR}},{{FSMR}},{{GSMR}},{{HSMR}}];
+			var srm=[{{ASRM}},{{BSRM}},{{CSRM}},{{DSRM}},{{ESRM}},{{FSRM}},{{GSRM}},{{HSRM}}];
+</pre>
+
+</div>
+<p>
+<span class="inlinebar">{{RMS}},{{RSM}},{{MSR}},{{SMR}},{{MRS}},{{SRM}}</span>
+</p>
+-->
+{%endblock%}
+<!-- 
+additional data
+  //  chart.categoryField = "country";
+ //  
+
+    
+
+
+    // GRAPH
+ -->

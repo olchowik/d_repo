@@ -1,0 +1,56 @@
+span {
+	margin-bottom:15px; 
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+	}
+    .sys {
+	margin:1px; 
+	text-align:center;
+	padding:1px 2px 2px 1px;
+	font-size:120%;
+	display: inline-block; 
+	width: 60px;
+	}  
+	.notTypeI {
+	margin:1px; 
+	text-align:center;
+	padding:1px 2px 2px 2px;
+	margin-right:2px;
+	font-size:120%;
+	color:#ffffff;
+	display: inline-block; 
+	width: 20px;
+	
+
+	}  
+   #red {
+	//border: 1px solid red;
+	background-image:url('R.jpg');	
+   }
+    #green {
+	background-image:url('M.jpg');	
+   }
+    #blue{
+	background-image:url('S.jpg');	
+   }
+     #redMinus {
+	background-image:url('minusR.jpg');	
+   }
+    #greenMinus {
+	background-image:url('minusM.jpg');	
+   }
+    #blueMinus{
+	background-image:url('minusS.jpg');	
+   }
+   #NO{
+	background-image:url('NO.jpg');	
+   }
+   #minusNO{
+	background-image:url('minusNO.jpg');	
+   }
+   #None{
+	background-image:url('none.bmp');	
+   }
+   #minusNone{
+	background-image:url('minusNone.bmp');	
+   }

@@ -1,0 +1,50 @@
+<html>
+<style>
+.node{
+border:1px solid rgb(77, 202, 9);
+border-radius: 3em 3em 3em 3em;
+background-color:#f5fefd; /* color of the left column  */ 
+box-shadow:0px 1px 1px   rgb(95, 95, 95);
+padding:2px;
+position:absolute;
+left:350;
+top:880;
+width:15px;
+height:15px;
+}
+.node:hover{
+border:1px solid rgb(77, 202, 9);
+border-radius: 3em 3em 3em 3em;
+background-color:white; /* color of the left column  */ 
+box-shadow:0px 1px 1px  rgb(95, 95, 95);
+padding:2px;
+}
+</style>
+<script>
+function set_pos()
+{
+{%for touple in list_of_coordinates%}
+	var  node = document.getElementById('{{forloop.counter}}')
+	{%for e in touple%}
+		{%if forloop.first%}
+			node.style.right="{{e}}px";
+		{%endif%}
+		{%if forloop.last%}
+			node.style.top="{{e}}px";
+		{%endif%}
+	{%endfor%}
+{%endfor%}
+}
+</script>
+<body  onload="set_pos()">
+<span class="node">
+M 
+</span>
+{%for touple in list_of_coordinates%}
+	<span class="node" id="{{forloop.counter}}">
+	kk
+	</span>
+{%endfor%}
+</body>
+</html>
+

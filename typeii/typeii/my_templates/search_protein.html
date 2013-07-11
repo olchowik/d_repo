@@ -1,0 +1,31 @@
+{%import "typei/prefix.html"%}
+
+<style type="text/css">
+body { color: #efd; background: #453; padding: 0 5em; margin: 0 }
+h1 { padding: 2em 1em; background: #675 }
+h2 { color: #bf8; border-top: 1px dotted #fff; margin-top: 2em }
+p { margin: 1em 0 }
+</style>
+
+<h1>Search Protein</h1>
+
+<form action="searchView" method="GET">
+<label for="q">Search: </label>
+<input type="text" name="q" value="{{ query|escape }}">
+<input type="submit" value="Search">
+</form>
+
+{% if query %}
+<h2>Results for "{{ query|escape }}":</h2>
+    {% if result %}
+        <ul>
+        {% for protein in result %}
+            <li>{{ protein|escape }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No proteins found</p>
+    {% endif %}
+{% endif %}
+
+{%import "typei/suffix.html"%}

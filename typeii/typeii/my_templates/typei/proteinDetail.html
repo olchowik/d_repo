@@ -1,0 +1,78 @@
+{% extends "typei/base.html" %}
+
+{%block maincont%}
+{{protein.system.id}}
+{{protein.system.subunit_composition}}
+{{protein.system.family_composition}}
+
+<LINK REL=StyleSheet HREF="{{MEDIA_URL}}css/protein.css" TYPE="text/css" MEDIA=screen>
+
+<div style="width:800px;  padding: 10px;" >
+
+{%if protein.subunit_kind %}
+	<h3 style="text-align:center;">{{protein.subunit_kind}}. {{protein.system_part}}.</h3>
+
+{%else%}
+	<h3 style="text-align:center;">{{protein.system_part}}.</h3> 
+	{%if protein.hh_pfam_id%}
+		<h4 style="padding-left:30px;padding-right:30px; ">
+		It is most similar to pFam family: '{{protein.hh_pfam_id}} 
+		Described as: {{protein.hh_pfam_desc}}
+		</h4>		
+	{%endif%}
+{%endif%}
+<div >
+<span style="float:left;"><a class="rollover" href="/enzymes/protein/{{protein.previous}}/"><img src="{{MEDIA_URL}}/images/previous3.png" alt="previous" > </a></span>
+<span style="float:right;"><a class="rollover" href="/enzymes/protein/{{protein.next}}/"><img src="{{MEDIA_URL}}/images/next3.png" alt="next" > </a></span>
+<br>
+</div>
+<table>
+
+{%if protein.hammer_cluster %}
+	<tr class='alt'>
+	<td>Family as assigned by HMMer</td>
+	<td>{{protein.hammer_cluster}} </td>
+	</tr>
+{%endif%}
+
+<tr>
+<td>gi</td>
+<td>{{protein.gene_id}}</td>
+</tr>
+<tr class='alt'>
+<td>Genome</td>
+<td>{{protein.system.dnapiece.genome.name}}</td>
+</tr>
+<tr>
+<td>DNA file</td>
+<td>{{protein.system.dnapiece.name}}</td>
+</tr>
+<tr class='alt'>
+<td>position on the DNA strand</td>
+<td>{{protein.genome_location}} </td>
+</tr>
+<tr>
+<td>DNA strand (plus or minus)</td>
+<td>{{protein.strand}} </td>
+</tr>
+<tr class='alt'>
+<td>length of the protein in bp</td>
+<td>{{protein.dna_length}} bp </td>
+</tr>
+<tr>
+<td>distance from the preceding protein</td>
+<td>{{protein.margin_left}} bp </td>
+</tr>
+</table>
+<br>
+ 
+<table>
+<tr>
+<th class="sequence">Amino acid sequence of this protein:</th>
+</tr>
+<tr>
+<td class="sequence">{{protein.aa_sequence|wordwrap:50 }}</td>
+</tr>
+</table>
+</div>
+{%endblock%}

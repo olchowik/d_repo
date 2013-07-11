@@ -1,0 +1,113 @@
+<style>
+.inline_fieldset{
+display:inline;
+line-height:170%;
+border-radius: 10px 10px 10px 10px; 
+border:1px dotted rgb(77, 202, 9); 
+padding: 0px 15px 15px 15px;
+margin-right: 20px;
+}
+
+select{
+padding:4px;
+}
+
+</style>
+
+<!--<form  id="system_search_form"   action="/enzymes/formtest" method="post" style="text-align:center;">-->
+<form id="system_search_form"  action="searchSys" method="POST" >
+<div class="form_wrapper" style="line-height:150%">
+{% csrf_token %}
+
+Select genomic clusters containing following subunits:<br>
+<fieldset class="inline_fieldset">
+<legend> hsdM</legend>
+Number of hsdM subunits: <br>
+<select name="Mnum" >
+  <option value="0">0</option>
+  <option selected value="0_or_more">0 or more</option>
+  <option value="1">1</option>
+  <option value="1_or_more">1 or more</option>
+  <option value="2">2</option>
+  <option value="2_or_more">2 or more</option>
+  <option value="3">3</option>
+  <option value="3_or_more">3 or more</option>
+</select><br>
+Contains hsdM from Family:<br>
+<select name="Mfam">
+  <option value="">any</option>
+  <option value="A">A</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="D">D</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+  <option value="H">H</option>
+  <option value="extra">extra</option>
+  <option value="NF">not found</option>
+</select>
+</fieldset>
+<fieldset class="inline_fieldset">
+<legend> hsdR</legend>
+Number of hsdR subunits: <br>
+<select name="Rnum">
+  <option value="0">0</option>
+  <option selected value="0_or_more">0 or more</option>
+  <option value="1">1</option>
+  <option value="1_or_more">1 or more</option>
+  <option value="2">2</option>
+  <option value="2_or_more">2 or more</option>
+  <option value="3">3</option>
+  <option value="3_or_more">3 or more</option>
+</select><br>
+Contains hsdR from Family:<br>
+<select name="Rfam">
+  <option value="">any</option>
+  <option value="A">A</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="D">D</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+  <option value="H">H</option>
+  <option value="extra">extra</option>
+  <option value="NF">not found</option>
+</select>
+</fieldset>
+<fieldset class="inline_fieldset" >
+<legend> hsdS</legend>
+Number of hsdS subunits: <br>
+<select name="Snum">
+  <option value="0">0</option>
+  <option selected value="0_or_more">0 or more</option>
+  <option value="1">1</option>
+  <option value="1_or_more">1 or more</option>
+  <option value="2">2</option>
+  <option value="2_or_more">2 or more</option>
+  <option value="3">3</option>
+  <option value="3_or_more">3 or more</option>
+</select><br>
+Contains hsds from Family:<br>
+<select name="Sfam">
+  <option value="">any</option>
+  <option value="A">A</option>
+  <option value="B">B</option>
+  <option value="C">C</option>
+  <option value="C1">C1</option>
+  <option value="C+C1">C+C1</option>
+  <option value="DH">DH</option>
+  <option value="E">E</option>
+  <option value="F">F</option>
+  <option value="G">G</option>
+  <option value="extra">extra</option>
+  <option value="NF">not found</option>
+</select>
+</fieldset>
+
+<div style="text-align:center; margin-left:-40px">
+<input class="sbutton"  type="submit" value="Search" />
+</div>
+</div><!--form wrapper-->
+</form>
