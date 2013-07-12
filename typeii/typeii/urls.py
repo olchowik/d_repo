@@ -31,6 +31,8 @@ urlpatterns = patterns('',
     url(r'^enzymes/listing', 'enzymes.views.listing'),
     url(r'^enzymes/home', 'enzymes.views.home'),   
     url(r'^enzymes/stats', 'enzymes.views.stats'), 
+    url(r'^enzymes/export', 'enzymes.views.data_for_Alberas'), 
+    
     url(r'^enzymes/searchSys', 'enzymes.views.searchSys'),   
     url(r'^enzymes/browseFam', 'enzymes.views.browse_by_family'),
     url(r'^enzymes/formtest', 'enzymes.views.formtest'),

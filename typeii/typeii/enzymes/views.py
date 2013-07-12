@@ -45,6 +45,21 @@ def results_to_csv_file(request):
     writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
 
     return response
+def data_for_Alberas(request):
+    system_list=System.objects.all()
+    for e in system_list:
+        subunit_composition=e.subunit_composition
+        pset= e.protein_set.exclude(subunit_kind="")
+        system_length=len(pset)
+        if system_length==3 and 'M' in subunit_composition and 'R' in subunit_composition and 'S' in subunit_composition:
+            protein_list= e.protein_set.all()
+            #print protein_list
+            for f in protein_list:
+                if f.gene_id.split(".")[0]!='X':
+                    print f.gene_id.split(".")[1],'\t',f.genome_location,'\t',f.strand,'\t',f.hammer_cluster.replace("_HMMER",''),'\t',f.subunit_kind,'\t',e.id,'\t',e.dnapiece.name,'\t',e.dnapiece.genome.name
+'''
+
+'''
 def calculate_order(request):
    
     order_MRS_dict=proteinAttributesModifier.mrs_calc()
